@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jQuery Train</title>
+  <style>
+    .green {
+      color: #0f0;
+    }
+    .red {
+      color: #f00;
+    }
+    .italic {
+      font-style: italic
+    }
+  </style>
+</head>
+
+<body>
+  
+  <button id="btn-hide" type="button">点我隐藏文本</button>
+  <button id="btn-show" type="button">点我显示文本</button>
+  <button id="btn-toggle" type="button">点我隐藏/显示文本</button>
+  <p><strong id="text-display">我是文本我是文本我是文本我是文本</strong></p>
+  <hr>
+  
+  <button id="btn-style" type="button">点我改变文本样式</button>
+  <p><strong id="text-style">我也是文本我也是文本我也是文本我也是文本</strong></p>
+  <hr>
+
+  <p class="p-hide">双击我消失</p>
+  <p class="p-hide">双击我也消失</p>
+  <p class="p-hide">双击我还是消失</p>
+  <hr>
+
+  <textarea id="textarea"></textarea>
+  <pre>
+    注：
+    keypress：
+      在键盘上按下一个按键，并产生一个字符时发生, 返回ASCII码。
+      1、只有按下能在屏幕上输出字符的按键时keypress事件才会触发。
+      2、若一直按着某按键则会不断触发。
+  </pre>
+  <hr>
+
+  <button id="btn-fade-in" type="button">fadeIn</button>
+  <button id="btn-fade-out" type="button">fadeOut</button>
+  <button id="btn-fade-toggle" type="button">fadeToggle</button>
+  <button id="btn-fade-to" type="button">fadeTo（不透明度0.2）</button>
+  <p id="text-fade">我是文本我是文本我是文本我是文本</p>
+  <hr>
+
+  <button id="btn-slide-down" type="button">slideDown</button>
+  <button id="btn-slide-up" type="button">slideUp</button>
+  <button id="btn-slide-toggle" type="button">slideToggle</button>
+  <p id="text-slide">我是文本我是文本我是文本我是文本</p>
+  <hr>
+
+  <button id="btn-animate">animate</button>
+  <button id="btn-animate-show">animate-show</button>
+  <button id="btn-animate-hide">animate-hide</button>
+  <button id="btn-animate-toggle">animate-toggle</button>
+  <div id="div-animate" style="width: 5rem; height: 5rem; background: #fc0; position: relative">
+    我是文字
+  </div>
+  <hr>
+
+  <button id="btn-chain">$("#p-chain").css("color","red").slideUp(700).slideDown(700)</button>
+  <p id="p-chain">我是文本我是文本我是文本我是文本</p>
+  <hr>
+
+  <input id="input-val" type="text" />
+  <button id="btn-val" type="button">获取输入值</button>
+  <hr>
+
+  <img id="img-attr" src="1" />
+  <button id="btn-attr" type="button">获取图片</button>
+  <hr>
+
+  <p>
+    <button id="btn-append" type="button">append: 内部末尾</button>
+    <button id="btn-prepend" type="button">prepend: 内部首位</button>
+    <button id="btn-after" type="button">after: 元素之后</button>
+    <button id="btn-before" type="button">before: 元素之前</button>
+  </p>
+  <p id="p-pend">我是段落我是段落我是段落我是段落</p>
+  <hr>
+
+  <div id="div-remove" style="width: 100px; height: 100px; background: #fc0">
+    <ol class="unused">
+      <li>111</li>
+      <li>222</li>
+    </ol>
+    <p>我是文本我是文本我是文本我是文本</p>
+  </div>
+  <button id="btn-remove-ol" type="button">$('ol').remove('.unused')</button>
+  <button id="btn-empty" type="button">empty()</button>
+  <button id="btn-remove" type="button">remove()</button>
+  <hr>
+
+  <div id="div-class">我是第一个盒子</div>
+  <div id="div-class-2">我是第二个盒子</div>
+  <button id="btn-add-class" type="button">addClass</button>
+  <button id="btn-remove-class" type="button">removeClass</button>
+  <button id="btn-toggle-class" type="button">toggleClass</button>
+  <hr>
+  
+  
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).ready(() => {
+    // 选择器
+    $('#btn-hide').click(() => $('#text-display').hide())
+    $('#btn-show').click(() => $('#text-display').show())
+    $('#btn-toggle').click(() => $('#text-display').toggle())
+    $('#btn-style').click(() => $('#text-style').css('color', '#f00'))
+    $('.p-hide').dblclick(function() { // 若用箭头函数，则this指向window对象
+      $(this).hide()
+    })
+
+    // 事件
+    // $('#textarea').mouseenter(function() {
+    //   $(this).val('鼠标移入')
+    // })
+    // $('#textarea').mouseleave(function() {
+    //   $(this).val('')
+    // })
+    // 也可以用hover事件写
+    $('#textarea').hover(function() {
+      $(this).val('鼠标移入')
+    }, function() {
+      $(this).val('')
+    })
+    $('#textarea').mouseup(function() {
+      const a = window.prompt('你点击了我，有什么愿望？')
+      alert(a + '这个愿望没法实现哈哈')
+    })
+    
+    // 淡入/淡出
+    $('#btn-fade-in').click(() => $('#text-fade').fadeIn('slow'))
+    $('#btn-fade-out').click(() => $('#text-fade').fadeOut(1000))
+    $('#btn-fade-toggle').click(() => $('#text-fade').fadeToggle())
+    $('#btn-fade-to').click(() => $('#text-fade').fadeTo(500, 0.2))
+    
+    // 滑动
+    $('#btn-slide-down').click(() => $('#text-slide').slideDown())
+    $('#btn-slide-up').click(() => $('#text-slide').slideUp())
+    $('#btn-slide-toggle').click(() => $('#text-slide').slideToggle(300))
+
+    // 动画
+    $('#btn-animate').click(() => $('#div-animate').animate({
+      left: '5rem',
+      fontSize: '+=5px'
+    }, 
+    1000,
+    () => alert('动画完成'))
+    )
+    // 动画中的属性也可以使用show、hide、toggle
+    $('#btn-animate-show').click(() => $('#div-animate').animate({width: 'show'}))
+    $('#btn-animate-hide').click(() => $('#div-animate').animate({width: 'hide'}))
+    $('#btn-animate-toggle').click(() => $('#div-animate').animate({width: 'toggle'}))
+    
+    // train
+    $('#btn-chain').click(() => $('#p-chain').css('color', 'red').slideUp(700).slideDown(700))
+
+    /**
+     * jQuery DOM操作
+     */
+    // val / text / html
+    $('#btn-val').click(() => alert('你输入了' + $('#input-val').val()))
+    
+    // attr
+    $('#btn-attr').click(() => 
+      $('#img-attr').attr('src', 'https://www.baidu.com/img/bd_logo1.png').css('width', '100px')
+    )
+    
+    // append / prepend / after / before
+    $('#btn-append').click(() => $('#p-pend').append('<b>append text</b>'))
+    $('#btn-prepend').click(() => $('#p-pend').prepend('<b>prepend text</b>'))
+    $('#btn-after').click(() => $('#p-pend').after('<b>after text</b>'))
+    // 也可以添加多个元素
+    $('#btn-before').click(() => $('#p-pend').before('<b>before text</b>&emsp;', '<i>before text</i>&emsp;'))
+    
+    // remove / empty
+    $('#btn-remove-ol').click(() => $('ol').remove('.unused'))
+    $('#btn-empty').click(() => $('#div-remove').empty())
+    $('#btn-remove').click(() => $('#div-remove').remove())
+
+    // addClass / removeClass / toggleClass
+    $('#btn-add-class').click(() => $('#div-class, #div-class-2').addClass('green'))
+    $('#btn-remove-class').click(() => $('#div-class, #div-class-2').removeClass('green'))
+    $('#btn-toggle-class').click(() => $('#div-class-2').toggleClass('italic'))
+
+    
+  })
+</script>
+</body>
+</html>
