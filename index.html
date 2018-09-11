@@ -88,6 +88,9 @@
   <p id="p-pend">我是段落我是段落我是段落我是段落</p>
   <hr>
 
+  <button id="btn-remove-ol" type="button">$('ol').remove('.unused')</button>
+  <button id="btn-empty" type="button">empty()</button>
+  <button id="btn-remove" type="button">remove()</button>
   <div id="div-remove" style="width: 100px; height: 100px; background: #fc0">
     <ol class="unused">
       <li>111</li>
@@ -95,18 +98,55 @@
     </ol>
     <p>我是文本我是文本我是文本我是文本</p>
   </div>
-  <button id="btn-remove-ol" type="button">$('ol').remove('.unused')</button>
-  <button id="btn-empty" type="button">empty()</button>
-  <button id="btn-remove" type="button">remove()</button>
   <hr>
 
-  <div id="div-class">我是第一个盒子</div>
-  <div id="div-class-2">我是第二个盒子</div>
   <button id="btn-add-class" type="button">addClass</button>
   <button id="btn-remove-class" type="button">removeClass</button>
   <button id="btn-toggle-class" type="button">toggleClass</button>
+  <div id="div-class">我是第一个盒子</div>
+  <div id="div-class-2">我是第二个盒子</div>
   <hr>
   
+  <button id="btn-parent" type="button">parent</button>
+  <button id="btn-parents" type="button">parents</button>
+  <div id="div-parent">
+    <ul>
+      <li id="li-parent">111</li>
+      <li>222</li>
+      <li>333</li>
+    </ul>
+  </div>
+  <hr>
+
+  <button id="btn-children" type="button">children</button>
+  <div id="div-children">
+    <p>lalala</p>
+    <b>hahaha</b>
+  </div>
+  <hr>
+
+  <button id="btn-siblings" type="button">siblings</button>
+  <button id="btn-next" type="button">next</button>
+  <button id="btn-nextAll" type="button">nextAll</button>
+  <button id="btn-nextUntil" type="button">nextUntil</button>
+  <div id="div-siblings">
+    <span>sss</span>
+    <p>ppp</p>
+    <i>iii</i>
+    <b>bbb</b>
+  </div>
+  <hr>
+
+  <button id="btn-first" type="button">first</button>
+  <button id="btn-last" type="button">last</button>
+  <button id="btn-eq" type="button">eq(0)</button>
+  <button id="btn-filter" type="button">filter（matched element）</button>
+  <button id="btn-not" type="button">not（matched element）</button>
+  <ul id="ul-first">
+    <li>111</li><li>222</li><li class="t">333</li><li>444</li>
+  </ul>
+  <hr>
+
   
 
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -194,7 +234,34 @@
     $('#btn-remove-class').click(() => $('#div-class, #div-class-2').removeClass('green'))
     $('#btn-toggle-class').click(() => $('#div-class-2').toggleClass('italic'))
 
+    // parent / parents
+    $('#btn-parent').click(() => $('#li-parent').parent().css('border', '1px solid #f00'))
+    $('#btn-parents').click(() => $('#li-parent').parents('ul, div').css('border', '1px solid #0f0')
+      // 当不确定父级有哪些元素时，可以使用parentUntil代替，获取当前元素与函数参数之间的父元素，如下：
+      // $('#li-parent').parentsUntil('body').css('border', '1px solid #0f0')
+    )
+
+    // children / find
+    $('#btn-children').click(() => $('#div-children').children().css('border', '1px solid #f00'))
+    // 等同：$('#btn-children').click(() => $('#div-children').find('*').css('1px solid #f00'))
+    // 等同： $('#div-children').children('p, b').css('border', '1px solid #f00'))
     
+    // siblings / next
+    $('#btn-siblings').click(() => $('#div-siblings p').siblings().css('color', '#0f0'))
+    // $('#btn-siblings').click(() => $('#div-siblings p').siblings('span').css('color', '#0f0'))
+    $('#btn-next').click(() => $('#div-siblings p').next().css('color', '#f00'))
+    $('#btn-nextAll').click(() => $('#div-siblings p').nextAll().css('color', '#fc0'))
+    $('#btn-nextUntil').click(() => $('#div-siblings p').nextUntil('b').css('color', '#00f'))
+    // 相似的方法还有：prev(), prevAll(), prevUntil()
+    
+    // first / last / filter / not / eq
+    $('#btn-first').click(() => $('#ul-first li').first().css('color', '#f00'))
+    $('#btn-last').click(() => $('#ul-first li').last().css('color', '#f00'))
+    $('#btn-filter').click(() => $('#ul-first li').filter('.t').css('color', '#00f'))
+    $('#btn-not').click(() => $('#ul-first li').not('.t').css('color', '#fc0'))
+    $('#btn-eq').click(() => $('#ul-first li').eq(0).css('color', '#cf0'))
+    
+
   })
 </script>
 </body>
