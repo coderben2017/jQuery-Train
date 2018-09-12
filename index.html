@@ -147,7 +147,10 @@
   </ul>
   <hr>
 
-  
+  <button id="btn-each" type="button">each</button>
+  <ul id="ul-each">
+    <li>111</li><li>222</li><li>333</li>
+  </ul>
 
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -261,7 +264,11 @@
     $('#btn-not').click(() => $('#ul-first li').not('.t').css('color', '#fc0'))
     $('#btn-eq').click(() => $('#ul-first li').eq(0).css('color', '#cf0'))
     
-
+    $('#btn-each').click(function() {
+      $('#ul-each li').each(function(index, item) {
+        $(this).text(index + ': ' + $(item).text())
+      })
+    })
   })
 </script>
 </body>
